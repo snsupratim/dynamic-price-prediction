@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride Cost Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #222;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #ffcc00;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            font-size: 1.5em;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            body {
+                flex-direction: column;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .form-container {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            .form-container input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <div id="ride_cost_prediction" class="form-container">
+            <h2>Ride Cost Prediction</h2>
+            <form action="/ride_cost_predict" method="post">
+                <label for="Number_of_Riders">Number of Riders:</label>
+                <input type="number" step="1" name="Number_of_Riders" required>
+
+                <label for="Number_of_Drivers">Number of Drivers:</label>
+                <input type="number" step="1" name="Number_of_Drivers" required>
+
+                <label for="Vehicle_Type">Vehicle Type (premium/economy):</label>
+                <input type="text" name="Vehicle_Type" required>
+
+                <label for="Expected_Ride_Duration">Expected Ride Duration (in minutes):</label>
+                <input type="number" step="1" name="Expected_Ride_Duration" required>
+
+                <input type="submit" value="Predict">
+            </form>
+
+            {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+
+</html>
